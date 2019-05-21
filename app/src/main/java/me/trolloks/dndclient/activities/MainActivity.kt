@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         raceService = retrofit.create(RaceService::class.java)
 
         launch {
-            race = getRaces()
+            race = async( Dispatchers.IO) { getRaces() }.await()
             mainText.text = race!!.name
         }
 
@@ -58,16 +58,14 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
     suspend fun getRaces(): Race {
         var actualRace: Race? = null;
-        withContext(Dispatchers.IO){
-            val call = raceService?.list()
-            val response = call?.execute()
-            val successful = response?.isSuccessful
-            if (successful!!){
-                val races = response.body()!!
-                for(race in races.results){
-                    println(race.name)
-                    actualRace = race;
-                }
+        val call = raceService?.list()
+        val response = call?.execute()
+        val successful = response?.isSuccessful
+        if (successful!!){
+            val races = response.body()!!
+            for(race in races.results){
+                println(race.name)
+                actualRace = race;
             }
         }
 
