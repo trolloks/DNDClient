@@ -1,4 +1,4 @@
-package me.trolloks.dndclient.models
+package me.trolloks.dndclient.models.unused
 
 class Race {
     val name : String? = null

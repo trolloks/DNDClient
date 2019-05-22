@@ -1,7 +1,7 @@
 package me.trolloks.dndclient.gateways.dnd5eapi
 
-import me.trolloks.dndclient.models.Race
-import me.trolloks.dndclient.models.ResourceList
+import me.trolloks.dndclient.models.unused.Race
+import me.trolloks.dndclient.models.unused.ResourceList
 import retrofit2.Call
 import retrofit2.http.GET
 
